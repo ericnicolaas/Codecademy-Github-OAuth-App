@@ -1,4 +1,4 @@
-/* 
+/*
  * Package Imports
 */
 
@@ -6,10 +6,10 @@ const path = require("path");
 require("dotenv").config();
 const express = require('express');
 const partials = require('express-partials');
-
-
+const session = require('express-session');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2');
 const app = express();
-
 
 /*
  * Variable Declarations
@@ -38,7 +38,11 @@ app.set('view engine', 'ejs');
 app.use(partials());
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
-
+app.use(session({
+  secret: 'codecademy',
+  resave: false,
+  saveUninitialized: false
+}));
 
 
 
@@ -75,4 +79,3 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 /*
  * ensureAuthenticated Callback Function
 */
-
